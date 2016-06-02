@@ -203,8 +203,8 @@ class TaurusPlotConfigDialog(Qt.QDialog):
         # self.connect(self.curvesAppearanceChooser,
         # Qt.SIGNAL("controlChanged"),self.apply) #"autoapply" mode for *all*
         # the curve appearance controls
-        self.curvesAppearanceChooser.assignToY1BT.clicked.connect(self.setCurvesYAxis)
-        self.curvesAppearanceChooser.assignToY2BT.clicked.connect(self.setCurvesYAxis)
+        self.curvesAppearanceChooser.assignToY1BT.clicked[()].connect(self.setCurvesYAxis)
+        self.curvesAppearanceChooser.assignToY2BT.clicked[()].connect(self.setCurvesYAxis)
         self.curvesAppearanceChooser.bckgndBT.clicked.connect(self.changeBackgroundColor)
         self.curvesAppearanceChooser.changeTitlesBT.clicked.connect(self.onChangeTitles)
         self.curvesAppearanceChooser.CurveTitleEdited.connect(self.onCurveTitleEdited)
