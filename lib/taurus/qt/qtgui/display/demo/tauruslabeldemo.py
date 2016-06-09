@@ -94,8 +94,8 @@ def demo():
             bg_widget.addItems(["quality", "state", "none"])
 
             model_widget.textChanged.connect(w.setModel)
-            fg_widget.currentIndexChanged.connect(w.setFgRole)
-            bg_widget.currentIndexChanged.connect(w.setBgRole)
+            fg_widget.currentIndexChanged[str].connect(w.setFgRole)
+            bg_widget.currentIndexChanged[str].connect(w.setBgRole)
             prefix_widget.textChanged.connect(w.setPrefixText)
             suffix_widget.textChanged.connect(w.setSuffixText)
             model_index_widget.textChanged.connect(w.setModelIndex)
