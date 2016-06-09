@@ -225,6 +225,7 @@ class TaurusTrend2DItem(XYImageItem, TaurusBaseComponent):
     '''A XYImageItem that is constructed by stacking 1D arrays from events from a Taurus 1D attribute'''
 
     scrollRequested = baseSignal('scrollRequested', object, object, object)
+    dataChanged = baseSignal('dataChanged')
 
     def __init__(self, param=None, buffersize=512, stackMode='datetime'):
         XYImageItem.__init__(self, numpy.arange(2), numpy.arange(
