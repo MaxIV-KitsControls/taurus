@@ -379,38 +379,38 @@ class TaurusMainWindow(Qt.QMainWindow, TaurusBaseContainer):
         '''initializes the application-wide actions'''
         self.quitApplicationAction = Qt.QAction(
             getThemeIcon("process-stop"), 'Exit Application', self)
-        self.quitApplicationAction.triggered.connect(self.close)
+        self.quitApplicationAction.triggered[()].connect(self.close)
         self.changeTangoHostAction = Qt.QAction(getThemeIcon(
             "network-server"), 'Change Tango Host ...', self)
         self.changeTangoHostAction.setShortcut(Qt.QKeySequence("Ctrl+P"))
-        self.changeTangoHostAction.triggered.connect(self._onChangeTangoHostAction)
+        self.changeTangoHostAction.triggered[()].connect(self._onChangeTangoHostAction)
 
         self.loadPerspectiveAction = Qt.QAction(getThemeIcon(
             "document-open"), 'Load Perspective ...', self)
-        self.loadPerspectiveAction.triggered.connect(self.loadPerspective)
+        self.loadPerspectiveAction.triggered[()].connect(self.loadPerspective)
 
         self.savePerspectiveAction = Qt.QAction(getThemeIcon(
             "document-save"), 'Save Perspective ...', self)
-        self.savePerspectiveAction.triggered.connect(self.savePerspective)
+        self.savePerspectiveAction.triggered[()].connect(self.savePerspective)
 
         self.deletePerspectiveAction = Qt.QAction(
             getIcon(":/actions/edit-delete.svg"), 'Delete Perspective ...', self)
-        self.deletePerspectiveAction.triggered.connect(self.removePerspective)
+        self.deletePerspectiveAction.triggered[()].connect(self.removePerspective)
 
         self.exportSettingsFileAction = Qt.QAction(
             getThemeIcon("document-save"), 'Export Settings ...', self)
-        self.exportSettingsFileAction.triggered.connect(self.exportSettingsFile)
+        self.exportSettingsFileAction.triggered[()].connect(self.exportSettingsFile)
 
         self.importSettingsFileAction = Qt.QAction(
             getThemeIcon("document-open"), 'Import Settings ...', self)
-        self.importSettingsFileAction.triggered.connect(self.importSettingsFile)
+        self.importSettingsFileAction.triggered[()].connect(self.importSettingsFile)
 
         #self.resetSettingsAction = Qt.QAction(getThemeIcon("edit-undo"),'Reset Settings', self)
         #self.connect(self.resetSettingsAction, Qt.SIGNAL("triggered()"), self.resetSettings)
 
         self.configurationAction = Qt.QAction(getThemeIcon(
             "preferences-system"), 'Configurations ...', self)
-        self.configurationAction.triggered.connect(self.configurationDialog.show)
+        self.configurationAction.triggered[()].connect(self.configurationDialog.show)
 
         #self.rpdb2Action = Qt.QAction("Spawn rpdb2", self)
         self.spawnRpdb2Shortcut = Qt.QShortcut(self)

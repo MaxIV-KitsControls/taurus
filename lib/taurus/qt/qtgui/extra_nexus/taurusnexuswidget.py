@@ -32,7 +32,7 @@ __all__ = ["TaurusNexusBrowser"]
 import numpy
 import posixpath
 
-from PyMca import HDF5Widget, HDF5Info, HDF5DatasetTable
+from PyMca5.PyMca import HDF5Widget, HDF5Info, HDF5DatasetTable
 from taurus.external.qt import Qt
 
 from taurus.qt.qtgui.container import TaurusWidget
@@ -101,9 +101,9 @@ class TaurusNeXusBrowser(TaurusWidget):
         self.layout().setMenuBar(self._toolbar)
 
         # connections
-        self.__fileModel.fileAppended.connect(self.treeWidget.fileAppended)
-        self.treeWidget.HDF5WidgetSignal.connect(self.onHDF5WidgetSignal)
-        self.openFileAction.triggered.connect(self.openFile)
+        self.__fileModel.sigFileAppended.connect(self.treeWidget.fileAppended)
+        self.treeWidget.sigHDF5WidgetSignal.connect(self.onHDF5WidgetSignal)
+        self.openFileAction.triggered[()].connect(self.openFile)
         self.togglePreviewAction.toggled.connect(self.__previewStack.setVisible)
 
         # configuration

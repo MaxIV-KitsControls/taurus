@@ -33,6 +33,15 @@ import weakref
 _DEBUG = False
 
 
+def get_signal(obj, signalname):
+    """Return signal from object and signal name."""
+    if '(' not in signalname:
+        return getattr(obj, signalname)
+    name, dtype = signalname.strip(')').split('(')
+    dtype = tuple(dtype.split(','))
+    return getattr(obj, name)[dtype]
+
+
 class DataModel(QtCore.QObject):
     '''
     An object containing one piece of data which is intended to be shared. The
@@ -122,7 +131,7 @@ class DataModel(QtCore.QObject):
 
         .. seealso:: :meth:`connectReader`, :meth:`setData`
         '''
-        getattr(writer, signalname).connect(self.setData)
+        get_signal(writer, signalname).connect(self.setData)
         self.__writerSignals.append((weakref.ref(writer), signalname))
 
     def disconnectWriter(self, writer, signalname):
@@ -133,7 +142,7 @@ class DataModel(QtCore.QObject):
 
         .. seealso:: :meth:`SharedDataManager.disconnectWriter`
         '''
-        ok = getattr(writer, signalname).disconnect(self.setData)
+        ok = get_signal(writer, signalname).disconnect(self.setData)
         self.__writerSignals.remove((weakref.ref(writer), signalname))
 
     def disconnectReader(self, slot):

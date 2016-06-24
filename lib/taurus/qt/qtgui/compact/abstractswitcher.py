@@ -135,8 +135,8 @@ class TaurusReadWriteSwitcher(TaurusWidget):
         self.exitEditAction.setShortcutContext(
             Qt.Qt.WidgetWithChildrenShortcut)
         self.addAction(self.exitEditAction)
-        self.enterEditAction.triggered.connect(self._onEnterEditActionTriggered)
-        self.exitEditAction.triggered.connect(self._onExitEditActionTriggered)
+        self.enterEditAction.triggered[()].connect(self._onEnterEditActionTriggered)
+        self.exitEditAction.triggered[()].connect(self._onExitEditActionTriggered)
 
         # add read and write widgets
         if self.readWClass is not None:
@@ -191,7 +191,10 @@ class TaurusReadWriteSwitcher(TaurusWidget):
         if self.enterEditEventTypes:
             self.readWidget.installEventFilter(self)
         for sig in self.enterEditSignals:
-            getattr(self.readWidget, sig).connect(self.enterEdit)
+            try:
+                getattr(self.readWidget, sig).connect(self.enterEdit)
+            except Exception, e:
+                self.debug('Cannot connect signal. Reason: %s', e)
         # update size policy
         self._updateSizePolicy()
         # register configuration (we use the class name to avoid mixing configs
@@ -215,7 +218,10 @@ class TaurusReadWriteSwitcher(TaurusWidget):
         if self.exitEditEventTypes:
             self.writeWidget.installEventFilter(self)
         for sig in self.exitEditSignals:
-            getattr(self.writeWidget, sig).connect(self.exitEdit)
+            try:
+                getattr(self.writeWidget, sig).connect(self.exitEdit)
+            except Exception, e:
+                self.debug('Cannot connect signal. Reason: %s', e)
         # update size policy
         self._updateSizePolicy()
         # register configuration (we use the class name to avoid mixing configs

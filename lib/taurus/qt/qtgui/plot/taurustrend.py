@@ -920,12 +920,12 @@ class TaurusTrend(TaurusPlot):
         self._usePollingBufferAction.toggled.connect(self.setUsePollingBuffer)
         self._setForcedReadingPeriodAction = Qt.QAction(
             "Set forced reading period...", None)
-        self._setForcedReadingPeriodAction.triggered.connect(self.setForcedReadingPeriod)
+        self._setForcedReadingPeriodAction.triggered[()].connect(self.setForcedReadingPeriod)
         self._clearBuffersAction = Qt.QAction("Clear Buffers", None)
-        self._clearBuffersAction.triggered.connect(self.clearBuffers)
+        self._clearBuffersAction.triggered[()].connect(self.clearBuffers)
         self._setMaxBufferSizeAction = Qt.QAction(
             "Change buffers size...", None)
-        self._setMaxBufferSizeAction.triggered.connect(self.setMaxDataBufferSize)
+        self._setMaxBufferSizeAction.triggered[()].connect(self.setMaxDataBufferSize)
         self._autoClearOnScanAction = Qt.QAction(
             "Auto-clear on new scans", None)
         self._autoClearOnScanAction.setCheckable(True)

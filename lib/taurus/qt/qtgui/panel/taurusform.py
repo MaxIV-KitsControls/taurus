@@ -120,22 +120,22 @@ class TaurusForm(TaurusWidget):
 
         self.chooseModelsAction = Qt.QAction('Modify Contents', self)
         self.addAction(self.chooseModelsAction)
-        self.chooseModelsAction.triggered.connect(self.chooseModels)
+        self.chooseModelsAction.triggered[()].connect(self.chooseModels)
 
         self.showButtonsAction = Qt.QAction('Show Buttons', self)
         self.showButtonsAction.setCheckable(True)
         self.addAction(self.showButtonsAction)
-        self.showButtonsAction.triggered.connect(self.setWithButtons)
+        self.showButtonsAction.triggered[bool].connect(self.setWithButtons)
         self.setWithButtons(withButtons)
 
         self.changeLabelsAction = Qt.QAction('Change labels (all items)', self)
         self.addAction(self.changeLabelsAction)
-        self.changeLabelsAction.triggered.connect(self.onChangeLabelsAction)
+        self.changeLabelsAction.triggered[()].connect(self.onChangeLabelsAction)
 
         self.compactModeAction = Qt.QAction('Compact mode (all items)', self)
         self.compactModeAction.setCheckable(True)
         self.addAction(self.compactModeAction)
-        self.compactModeAction.triggered.connect(self.setCompact)
+        self.compactModeAction.triggered[bool].connect(self.setCompact)
 
         self.resetModifiableByUser()
         self.setSupportedMimeTypes([TAURUS_MODEL_LIST_MIME_TYPE, TAURUS_DEV_MIME_TYPE,
@@ -1008,15 +1008,15 @@ def taurusFormMain():
     from taurus.qt.qtgui.resource import getThemeIcon
     quitApplicationAction = Qt.QAction(
         getThemeIcon("process-stop"), 'Close Form', dialog)
-    quitApplicationAction.triggered.connect(dialog.close)
+    quitApplicationAction.triggered[()].connect(dialog.close)
 
     saveConfigAction = Qt.QAction("Save current settings...", dialog)
     saveConfigAction.setShortcut(Qt.QKeySequence.Save)
-    saveConfigAction.triggered.connect(dialog.saveConfigFile)
+    saveConfigAction.triggered[()].connect(dialog.saveConfigFile)
 
     loadConfigAction = Qt.QAction("&Retrieve saved settings...", dialog)
     loadConfigAction.setShortcut(Qt.QKeySequence.Open)
-    loadConfigAction.triggered.connect(dialog.loadConfigFile)
+    loadConfigAction.triggered[()].connect(dialog.loadConfigFile)
 
     dialog.addActions(
         (saveConfigAction, loadConfigAction, quitApplicationAction))

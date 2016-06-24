@@ -505,7 +505,7 @@ class TaurusDevTree(TaurusTreeNodeContainer, Qt.QTreeWidget, TaurusBaseWidget):
         self.setGeometry(Qt.QRect(90, 60, 256, 192))
         self.actionFindInTree = Qt.QAction(self)
         self.actionFindInTree.setShortcut(Qt.QKeySequence.Find)
-        self.actionFindInTree.triggered.connect(self.findDialog)
+        self.actionFindInTree.triggered[()].connect(self.findDialog)
         #self.connect(self, Qt.SIGNAL("itemClicked"), self.clickedEvent)
         from taurus.qt.qtgui.table.qdictionary import QDictionaryEditor, QListEditor
         self.ExpertMenu.append(

@@ -51,6 +51,7 @@ class TaurusCurveDialog(CurveDialog, TaurusBaseWidget):
     .. seealso:: :class:`TaurusCurveWidget`
     '''
     _modifiableByUser = True
+    modelChanged = Qt.pyqtSignal([], ['QStringList'], [str])
 
     def __init__(self, parent=None, designMode=False, toolbar=True, **kwargs):
         '''see :class:`guiqwt.plot.CurveDialog` for other valid initialization parameters'''
@@ -196,6 +197,8 @@ class TaurusTrendDialog(CurveDialog, TaurusBaseWidget):
     '''
     _modifiableByUser = True
 
+    modelChanged = Qt.pyqtSignal([], ['QStringList'], [str])
+
     def __init__(self, parent=None, designMode=False, taurusparam=None, toolbar=True, **kwargs):
         '''see :class:`guiqwt.plot.CurveDialog` for other valid initialization parameters'''
         CurveDialog.__init__(self, parent=parent, toolbar=toolbar, **kwargs)
@@ -215,6 +218,7 @@ class TaurusTrendDialog(CurveDialog, TaurusBaseWidget):
             taurusparam = TaurusTrendParam()
         self.defaultTaurusparam = taurusparam
         self.setContextMenuPolicy(Qt.Qt.CustomContextMenu)
+        self.registerConfigDelegate(self.get_tool(AutoScrollTool))
 
     def keyPressEvent(self, event):
         if(event.key() == Qt.Qt.Key_Escape):

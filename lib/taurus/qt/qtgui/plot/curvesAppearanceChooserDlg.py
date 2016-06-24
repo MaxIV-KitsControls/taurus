@@ -104,7 +104,7 @@ class CurvesAppearanceChooser(Qt.QWidget):
     NAME_ROLE = Qt.Qt.UserRole
 
     controlChanged = Qt.pyqtSignal()
-    curveAppearanceChanged = Qt.pyqtSignal(tuple, list)
+    curveAppearanceChanged = Qt.pyqtSignal(object, list)
     CurveTitleEdited = Qt.pyqtSignal('QString', 'QString')
 
     def __init__(self, parent=None, curvePropDict={}, showButtons=False, autoApply=False, designMode=False):
