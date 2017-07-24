@@ -6,7 +6,7 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-taurus
-Version:        4.0.0
+Version:        4.1.0
 Release:        1%{?dist}.maxlab
 Summary:        Taurus framework
 Group:          Development/Languages
