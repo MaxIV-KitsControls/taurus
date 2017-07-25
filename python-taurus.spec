@@ -2,16 +2,16 @@
 # pure python modules goes in python_sitelib
 # platform-specific modules goes in python_sitearch
 
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+# %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+# %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-taurus
 Version:        4.1.0
-Release:        1%{?dist}.maxiv
+Release:        1%{?dist}.maxlab
 Summary:        Taurus framework
 Group:          Development/Languages
 License:        GPL
-URL:            http://www.tango-controls.org/static/taurus
+URL:            http://www.taurus-scada.org/
 Source:         taurus-%{version}.tar.gz
 BuildRequires:  python-setuptools
 BuildRequires:  PyQt4-devel
@@ -45,7 +45,7 @@ build on top of PyTango and PyQt. Taurus stands for TAngo User interface ‘R’
 
 %install
 python setup.py install --single-version-externally-managed \
-                        -O1 --skip-build --prefix=%{_prefix}\
+                        -O1 --skip-build \
                         --root=%{buildroot} --record=INSTALLED_FILES
 
 # rm -rf %{buildroot}
