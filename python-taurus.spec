@@ -7,7 +7,7 @@
 
 Name:           python-taurus
 Version:        4.1.0
-Release:        1%{?dist}.maxlab
+Release:        1%{?dist}.maxiv
 Summary:        Taurus framework
 Group:          Development/Languages
 License:        GPL
@@ -44,13 +44,15 @@ build on top of PyTango and PyQt. Taurus stands for TAngo User interface ‘R’
 #%{__python} setup.py build_doc --external-img-tools
 
 %install
-rm -rf %{buildroot}
+python setup.py install --single-version-externally-managed -O1 --root=%{buildroot} --record=INSTALLED_FILES
 
-%{__python} setup.py install \
-    -O1 \
-    --skip-build \
-    --prefix=%{_prefix} \
-    --root=%{buildroot}
+# rm -rf %{buildroot}
+
+# %{__python} setup.py install \
+#     -O1 \
+#     --skip-build \
+#     --prefix=%{_prefix} \
+#     --root=%{buildroot}
 
 # move html documentation to temporary location
 #mv %{buildroot}%{_docdir}/taurus/html .
@@ -59,7 +61,7 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
-%files
+%files -f INSTALLED_FILES
 %defattr(-,root,root)
 #%doc html
 #%{_bindir}/*
