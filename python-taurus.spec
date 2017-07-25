@@ -44,7 +44,9 @@ build on top of PyTango and PyQt. Taurus stands for TAngo User interface ‘R’
 #%{__python} setup.py build_doc --external-img-tools
 
 %install
-python setup.py install --single-version-externally-managed -O1 --root=%{buildroot} --record=INSTALLED_FILES
+python setup.py install --single-version-externally-managed \
+                        -O1 --skip-build --prefix=%{_prefix}\
+                        --root=%{buildroot} --record=INSTALLED_FILES
 
 # rm -rf %{buildroot}
 
