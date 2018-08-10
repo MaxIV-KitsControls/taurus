@@ -701,6 +701,13 @@ class TangoAttribute(TaurusAttribute):
             etype, evalue = self._pushConfEvent(event)
         # if it is an attribute event
         else:
+            attr_name = event.attr_name
+            attr_value = event.attr_value
+            if attr_value is None:
+                self.debug("taurus: tangoattribute.py: event received. %s" % str(event))
+            else:
+                value = str(attr_value.value)
+                self.debug("taurus: tangoattribute.py: EVENT RECEIVED. now is %s" % value)
             etype, evalue = self._pushAttrEvent(event)
 
         # notify the listeners if required (i.e, if etype is not None)

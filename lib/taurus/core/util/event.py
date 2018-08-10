@@ -550,13 +550,17 @@ class AttributeEventWait(object):
         :param v: event value
         :type  v: object"""
         t = time.time()
+        print("taurus/core/util/event: AttributeEventWait. in fireEvent Locking %s" % self._attr.getFullName())
         self.lock()
+        print("taurus/core/util/event: AttributeEventWait. in fireEvent Locked %s" % self._attr.getFullName())
         try:
             self._last_val = v
             self._event_set[v] = t
             self._cond.notifyAll()
         finally:
+            print("taures/core/util/event: AttributeEventWait. Unlocking %s" % self._attr.getFullName())
             self.unlock()
+            print("taures/core/util/event: AttributeEventWait. Unlocked %s" % self._attr.getFullName())
 
     def getLastRecordedEvent(self):
         """returns the value of the last recorded event or None if no event has
@@ -614,7 +618,9 @@ class AttributeEventWait(object):
         if after is None:
             after = 0
         s = self._event_set
+        print("taures/core/util/event: AttributeEventWait. Locking in waitEvent %s" % self._attr.getFullName())
         self.lock()
+        print("taures/core/util/event: AttributeEventWait. Locked in waitEvent %s" % self._attr.getFullName())
         try:
             # increase the retries by one just because of how the loop is done
             if retries > 0:
@@ -641,7 +647,9 @@ class AttributeEventWait(object):
                 "AttributeEventWait: Caught exception while waitting: %s\n" % str(e))
             raise e
         finally:
+            print("taures/core/util/event: AttributeEventWait. Unlocking %s" % self._attr.getFullName())
             self.unlock()
+            print("taures/core/util/event: AttributeEventWait. Unlocked %s" % self._attr.getFullName())
 
 
 class AttributeEventIterator(object):
